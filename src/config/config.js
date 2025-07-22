@@ -10,7 +10,7 @@ const validateEnv = (envVar, defaultValue = undefined) => {
   return process.env[envVar] || defaultValue;
 };
 
-const MONGO_USER = validateEnv('MONGO_USER', 'user');
+const MONGO_URI = validateEnv('MONGO_URI', 'user');
 const MONGO_PASSWORD = validateEnv('MONGO_PASSWORD', 'password');
 const MONGO_DB = validateEnv('MONGO_DB', 'db_name');
 const MONGO_HOST = validateEnv('MONGO_HOST', 'host');
@@ -21,7 +21,8 @@ const config = {
   port: validateEnv('PORT', '5000'),
   
   // MongoDB Configuration
-  mongoUri: `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DB}?retryWrites=true&w=majority&appName=${MONGO_DB}`,
+  mongoUri : MONGO_URI,
+  // mongoUri: `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DB}?retryWrites=true&w=majority&appName=${MONGO_DB}`,
 
   // Security Configuration
   jwtSecret: validateEnv('JWT_SECRET'),
